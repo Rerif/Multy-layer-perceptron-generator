@@ -3,19 +3,36 @@ import numpy as np
 
 sigmoid = lambda x: (1/(1+2.718**(-x)))
 
+class Few_layers(Exception):
+	def __init__(self, txt):
+		self.txt = txt
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Perceptron_lot_of_layers():
 	''' In the class passed list of count layers and neurons,
 	and integer learning rate.
 	example:
 	plol = Perceptron_lot_of_layers([2, 3, 1], 0.1)'''
 	def __init__(self, list_layers, learning_rate):
+		if len(list_layers) < 3:
+			raise Few_layers("Use more that 2 layers, when creating perceptron")
 		''' creating input, hidden and output layers, learning rate and weights'''
 		self.in_layer = list_layers[0]
 		self.hidden_layers = list_layers[1: -1]
 		self.output_lauer = list_layers[-1]
 		self.lr = learning_rate
 		self.weights = []
-
 		# setting start random weights
 		# weights between input and first hidden layer
 		self.weights.append(np.random.rand(self.hidden_layers[0], self.in_layer)-0.5)	
@@ -81,10 +98,10 @@ class Perceptron_lot_of_layers():
 
 
 
-def main():
+def test():
 	data_x = [0.1, 0.2, 0.3, 0.4, 0.5]
 	data_y = [0.2, 0.3, 0.4, 0.5, 0.6]
-	nn = Perceptron_lot_of_layers([1, 2, 1], 0.01)
+	nn = Perceptron_lot_of_layers([1, 3, 1], 0.01)
 	for epoch in range(100):
 		for i in range(len(data_x)):
 			true_x = data_x[i]
@@ -94,4 +111,4 @@ def main():
 
 
 if __name__ == '__main__':
-	main()
+	test()
