@@ -1,32 +1,19 @@
-
 import numpy as np
 
 sigmoid = lambda x: (1/(1+2.718**(-x)))
 
-class Few_layers(Exception):
-	def __init__(self, txt):
-		self.txt = txt
-
-
-
-
-
-
-
-
-
-
-
-
 
 class Perceptron_lot_of_layers():
 	''' In the class passed list of count layers and neurons,
-	and integer learning rate.
+	and learning rate.
 	example:
 	plol = Perceptron_lot_of_layers([2, 3, 1], 0.1)'''
 	def __init__(self, list_layers, learning_rate):
 		if len(list_layers) < 3:
-			raise Few_layers("Use more that 2 layers, when creating perceptron")
+			assert False, "Using less than 3 layers"
+		for neurons in list_layers:
+			if neurons <= 0:
+				assert False, "Can't use <= 0 count of neurons"
 		''' creating input, hidden and output layers, learning rate and weights'''
 		self.in_layer = list_layers[0]
 		self.hidden_layers = list_layers[1: -1]
@@ -35,7 +22,7 @@ class Perceptron_lot_of_layers():
 		self.weights = []
 		# setting start random weights
 		# weights between input and first hidden layer
-		self.weights.append(np.random.rand(self.hidden_layers[0], self.in_layer)-0.5)	
+		self.weights.append(np.random.rand(self.hidden_layers[0], self.in_layer)-0.5)
 		i = 1
 		# weights between hidden layers
 		while i <= len(self.hidden_layers)-1:
@@ -46,7 +33,7 @@ class Perceptron_lot_of_layers():
 
 	def perceptron_training(self, input_list, true_data_list):
 		# data for training(recomendation (0...1))
-		inputs = np.array(input_list, ndmin = 2).T
+		inputs = np.array(input_list, ndmin=2).T
 		# true values for training
 		targets = np.array(true_data_list, ndmin=2).T
 		# hidden signals calculation
@@ -58,7 +45,6 @@ class Perceptron_lot_of_layers():
 			else:
 				hidden_signals.append(sigmoid(np.dot(self.weights[i], hidden_signals[i-1])))
 			i += 1
-
 		# errors calculations
 		output_errors = targets - hidden_signals[-1]
 		hidden_errors = []
@@ -85,7 +71,7 @@ class Perceptron_lot_of_layers():
 			i += 1
 
 	def use_perceptron(self, inputs_list):
-		inputs = np.array(inputs_list, ndmin = 2).T
+		inputs = np.array(inputs_list, ndmin=2).T
 		hidden_signals = []
 		for i in range(len(self.weights)):
 			if i == 0:
@@ -95,14 +81,11 @@ class Perceptron_lot_of_layers():
 		return hidden_signals[-1][0][0]
 
 
-
-
-
 def test():
 	data_x = [0.1, 0.2, 0.3, 0.4, 0.5]
 	data_y = [0.2, 0.3, 0.4, 0.5, 0.6]
-	nn = Perceptron_lot_of_layers([1, 3, 1], 0.01)
-	for epoch in range(100):
+	nn = Perceptron_lot_of_layers([1, 2, 3, 2, 1], 0.01)
+	for epoch in range(10):
 		for i in range(len(data_x)):
 			true_x = data_x[i]
 			true_y = data_y[i]
