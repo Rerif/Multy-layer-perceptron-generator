@@ -1,4 +1,4 @@
-# Perceptron-lot-of-layers
+# Multy-layer perceptron
 Simple perceptron generator.
 
 Use this if you need a simple perceptron without use special ML libraries.
