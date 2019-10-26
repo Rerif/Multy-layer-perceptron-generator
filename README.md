@@ -9,7 +9,7 @@ This genarator based on numpy.
 ### Step I
 Create the perceptron:
 ```python
-from perceptron import Multy-layer perceptron as plol
+from perceptron import Multy_layer_perceptron as plol
 
 per = plol([3, 5, 1], 0.1)
 ```
