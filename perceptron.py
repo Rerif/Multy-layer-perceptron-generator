@@ -3,7 +3,7 @@ import numpy as np
 sigmoid = lambda x: (1/(1+2.718**(-x)))
 
 
-class Perceptron_lot_of_layers():
+class Multy_layer_perceptron():
 	''' In the class passed list of count layers and neurons,
 	and learning rate.
 	example:
@@ -84,7 +84,7 @@ class Perceptron_lot_of_layers():
 def test():
 	data_x = [0.1, 0.2, 0.3, 0.4, 0.5]
 	data_y = [0.2, 0.3, 0.4, 0.5, 0.6]
-	nn = Perceptron_lot_of_layers([1, 2, 3, 2, 1], 0.01)
+	nn = Multy_layer_perceptron([1, 2, 3, 2, 1], 0.01)
 	for epoch in range(10):
 		for i in range(len(data_x)):
 			true_x = data_x[i]
